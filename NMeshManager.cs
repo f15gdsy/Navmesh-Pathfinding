@@ -9,22 +9,27 @@ using System.Collections.Generic;
  * 2. Create "Navmesh Container" GameObject to store all the navmeshes.
  * 3. Create Navmesh
  */
-public class NMeshManager : SingletonBase<NMeshManager> {
+public class NMeshManager : MonoBehaviour {
 
 	public List<NMesh> _meshes;
 	public List<NMesh> meshes {get{return _meshes;}}
 
 	public int pixelsPerUnit = 100;
 
-//	private static NMeshManager _instance;
-//	public static NMeshManager instance {
-//		get {
-//			if (_instance == null) {
-//				Debug.Log("NMeshManager: instance is null.");
-//			}
-//			return _instance;
-//		}
-//	}
+	private static NMeshManager _instance;
+	public static NMeshManager instance {
+		get {
+			if (_instance == null) {
+				Debug.Log("NMeshManager: instance is null.");
+			}
+			return _instance;
+		}
+	}
+
+
+	void Awake () {
+		_instance = this;
+	}
 	
 	void Start () {
 		RefreshMeshes();
